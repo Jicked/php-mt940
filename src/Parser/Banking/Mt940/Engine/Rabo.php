@@ -126,12 +126,17 @@ class Rabo extends Engine
     {
         $description = parent::sanitizeDescription($string);
         if (strpos($description, '/REMI/') !== false
-                && preg_match('#/REMI/(.*?)/(ISDT|CSID|RTRN)/#s', $description, $results) && !empty($results[1])
+                && preg_match('#/REMI/(.*?)/(ISDT|CSID|RTRN|PURP|$)/#s', $description, $results) && !empty($results[1])
         ) {
             return $results[1];
         }
         if (strpos($description, '/EREF/') !== false
                 && preg_match('#/EREF/(.*?)/(ORDP)/#s', $description, $results) && !empty($results[1])
+        ) {
+            return $results[1];
+        }
+        if (strpos($description, '/PREF/') !== false
+                && preg_match('#/PREF/(.*?)/(ACCW)/#s', $description, $results) && !empty($results[1])
         ) {
             return $results[1];
         }
